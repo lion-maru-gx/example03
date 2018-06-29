@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.gr.java_conf.lion_maru_gx.example.example03.VoiceListController">
    <children>
       <HBox prefWidth="200.0" spacing="10.0">
          <children>
@@ -37,66 +37,66 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_0" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_1" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_2" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_3" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_4" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_5" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_6" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_7" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_8" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_9" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_10" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_11" minWidth="140.0" mnemonicParsing="false" text="Button" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_12" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_13" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_14" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_15" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_16" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_17" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_18" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_19" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_20" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_21" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_22" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_23" minWidth="140.0" mnemonicParsing="false" text="Button" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_24" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_25" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_26" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_27" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_28" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_29" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_30" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_31" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_32" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_33" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_34" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_35" minWidth="140.0" mnemonicParsing="false" text="Button" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
-                  <Button minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_36" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_37" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_38" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_39" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_40" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_41" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_42" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_43" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_44" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_45" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_46" minWidth="140.0" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="voice_47" minWidth="140.0" mnemonicParsing="false" text="Button" />
                </children>
             </VBox>
          </children>
