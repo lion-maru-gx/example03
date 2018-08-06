@@ -1,17 +1,12 @@
 package jp.gr.java_conf.lion_maru_gx.example.common;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiDevice;
-import javax.sound.midi.MidiEvent;
-import javax.sound.midi.MidiMessage;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
-import javax.sound.midi.Receiver;
 import javax.sound.midi.Sequencer;
-import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Synthesizer;
 import javax.sound.midi.SysexMessage;
 import javax.xml.bind.DatatypeConverter;
@@ -34,49 +29,7 @@ public class MidiUtil {
 	/**
 	 * 入力レシーバ
 	 */
-	private static Receiver receiver;
-	/**
-	 * 入力メッセージキュー
-	 */
-	private static LinkedList<MidiEvent> inputMidiEventQueue = new LinkedList<>();
-	/**
-	 * ShortMessageの有効／無効
-	 */
-	private static boolean shortMessageActive = true;
-
-	/**
-	 * SysexMessageの有効／無効
-	 */
-	private static boolean sysexMessageActive = true;
-
-	/**
-	 * SysexMessageの有効／無効
-	 */
-	private static boolean systemMessageActive = false;
-
-	public static boolean isShortMessageActive() {
-		return shortMessageActive;
-	}
-
-	public static void setShortMessageActive(boolean inShortMessageActive) {
-		shortMessageActive = inShortMessageActive;
-	}
-
-	public static boolean isSysexMessageActive() {
-		return sysexMessageActive;
-	}
-
-	public static void setSysexMessageActive(boolean inSysexMessageActive) {
-		sysexMessageActive = inSysexMessageActive;
-	}
-
-	public static boolean isSystemMessageActive() {
-		return systemMessageActive;
-	}
-
-	public static void setSystemMessageActive(boolean inSystemMessageActive) {
-		systemMessageActive = inSystemMessageActive;
-	}
+	private static MidiInputQueue receiver;
 
 	/**
 	 * staticの初期化
@@ -84,31 +37,7 @@ public class MidiUtil {
 	static {
 
 		// MIDI入力用レシーバの定義
-		receiver = new Receiver() {
-			long baseTime=0;
-
-			@Override
-			public void close() {
-				inputMidiEventQueue.clear();
-			}
-
-			@Override
-			public void send(MidiMessage message, long timeStamp) {
-				if (message != null) {
-					// レシーバがタイムスタンプをサポートしていない場合は、
-					// タイムスタンプ値は -1になるためシステム時間を使用する。
-					if(timeStamp == -1) {
-						timeStamp = System.currentTimeMillis();
-					}
-					if(baseTime == 0) {
-						baseTime = timeStamp;
-					}
-					inputMidiEventQueue.offer(new MidiEvent(message,timeStamp - baseTime));
-					baseTime = timeStamp;
-				}
-			}
-
-		};
+		receiver = new MidiInputQueue();
 
 	}
 
@@ -125,7 +54,9 @@ public class MidiUtil {
 			// throws MidiUnavailableException
 			try {
 				MidiDevice device = MidiSystem.getMidiDevice(infos[i]);
-				if (device.getMaxReceivers() != 0 && !(device instanceof Synthesizer) && !(device instanceof Sequencer))
+				// getMaxReceivers()が0以上の場合は出力デバイス
+				// Synthesizer、Sequencer以外はハードウェアMIDIポート
+				if (device.getMaxReceivers() > 0 && !(device instanceof Synthesizer) && !(device instanceof Sequencer))
 					list.add(infos[i]);
 			} catch (MidiUnavailableException e) {
 				e.printStackTrace();
@@ -147,7 +78,9 @@ public class MidiUtil {
 			// throws MidiUnavailableException
 			try {
 				MidiDevice device = MidiSystem.getMidiDevice(infos[i]);
-				if (device.getMaxTransmitters() != 0 && !(device instanceof Synthesizer)
+				// getMaxTransmitters()が0以上の場合は入力デバイス
+				// Synthesizer、Sequencer以外はハードウェアMIDIポート
+				if (device.getMaxTransmitters() > 0 && !(device instanceof Synthesizer)
 						&& !(device instanceof Sequencer))
 					list.add(infos[i]);
 			} catch (MidiUnavailableException e) {
@@ -348,61 +281,6 @@ public class MidiUtil {
 		}
 	}
 
-	/**
-	 * 入力MIDIイベントの取得
-	 */
-	public static MidiEvent getInputMidiEvent() {
-		if(inputMidiEventQueue.isEmpty()) {
-			return null;
-		}
-		return inputMidiEventQueue.poll();
-	}
-	/**
-	 * 入力メッセージの取得
-	 *
-	 * @return
-	 */
-	public static MidiMessage getInputMessage() {
-		MidiMessage message = null;
-		while (!inputMidiEventQueue.isEmpty()) {
-			message = getInputMidiEvent().getMessage();
-			if (message.getMessage()[0] == (byte) 0xf8 ||
-					message.getMessage()[0] == (byte) 0xfe) {
-				if(isSystemMessageActive()) {
-					break;
-				}
-				message = null;
-			}
-			if (message instanceof ShortMessage) {
-				if(isShortMessageActive()) {
-					break;
-				}
-				message = null;
-			} else if (message instanceof SysexMessage) {
-				if(isSysexMessageActive()) {
-					break;
-				}
-				message = null;
-			}
-		}
-		return message;
-	}
-
-	/**
-	 * 入力メッセージの取得
-	 *
-	 * @return
-	 */
-	public static String getInputMessages() {
-		String msg = "";
-		while (!inputMidiEventQueue.isEmpty()) {
-			MidiMessage midiMsg = getInputMessage();
-			if(midiMsg != null) {
-				msg = msg + DatatypeConverter.printHexBinary(midiMsg.getMessage()) + "\n";
-			}
-		}
-		return msg;
-	}
 
 	/**
 	 * 終了処理
