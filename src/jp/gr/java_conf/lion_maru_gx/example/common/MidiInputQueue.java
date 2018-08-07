@@ -30,17 +30,17 @@ public class MidiInputQueue implements Receiver {
 	/**
 	 * システム・コモン・メッセージの有効／無効
 	 */
-	private boolean systemCommonMessageActive= false;
+	private boolean systemCommonMessageActive = false;
 	/**
 	 * SysexMessageの有効／無効
 	 */
 
 	private boolean sysexMessageActive = true;
 
-
 	@Override
 	public void send(MidiMessage message, long timeStamp) {
 		if (message != null) {
+			// 受信メッセージをフィルタリングします。
 			if (message instanceof ShortMessage) {
 				switch (message.getStatus()) {
 				case ShortMessage.NOTE_OFF: // 0x80
@@ -59,7 +59,7 @@ public class MidiInputQueue implements Receiver {
 				case ShortMessage.SONG_SELECT://0xF3
 				case ShortMessage.TUNE_REQUEST://0xF6
 				case ShortMessage.END_OF_EXCLUSIVE://0xF7
-					if(!isSystemCommonMessageActive()) {
+					if (!isSystemCommonMessageActive()) {
 						return;
 					}
 					break;
@@ -79,7 +79,7 @@ public class MidiInputQueue implements Receiver {
 				}
 			}
 			// レシーバがタイムスタンプをサポートしていない場合は、
-			// タイムスタンプ値は -1になるためシステム時間を使用する。
+			// タイムスタンプ値は -1になるためシステム時間を使用します。
 			if (timeStamp == -1) {
 				timeStamp = System.currentTimeMillis();
 			}
@@ -97,7 +97,7 @@ public class MidiInputQueue implements Receiver {
 	}
 
 	/**
-	 * 入力MIDIイベントの取得
+	 * 入力MIDIイベントの取得します。
 	 */
 	public MidiEvent getInputMidiEvent() {
 		if (inputMidiEventQueue.isEmpty()) {
@@ -107,7 +107,7 @@ public class MidiInputQueue implements Receiver {
 	}
 
 	/**
-	 * 入力メッセージの取得
+	 * 入力メッセージの取得します。
 	 *
 	 * @return
 	 */
@@ -119,7 +119,7 @@ public class MidiInputQueue implements Receiver {
 	}
 
 	/**
-	 * 入力メッセージの取得
+	 * 入力メッセージを取得します。
 	 *
 	 * @return
 	 */
@@ -135,7 +135,7 @@ public class MidiInputQueue implements Receiver {
 	}
 
 	/**
-	 *
+	 * チャンネル・ボイス・メッセージの有効／無効を取得します。
 	 * @return
 	 */
 	public boolean isChanelVoiceMessageActive() {
@@ -143,31 +143,15 @@ public class MidiInputQueue implements Receiver {
 	}
 
 	/**
-	 *
-	 * @param inShortMessageActive
+	 * チャンネル・ボイス・メッセージの有効／無効を設定します。
+	 * @param chanelVoiceMessageActive
 	 */
-	public void setChanelVoiceMessageActive(boolean inShortMessageActive) {
-		chanelVoiceMessageActive = inShortMessageActive;
+	public void setChanelVoiceMessageActive(boolean chanelVoiceMessageActive) {
+		this.chanelVoiceMessageActive = chanelVoiceMessageActive;
 	}
 
 	/**
-	 *
-	 * @return
-	 */
-	public boolean isSysexMessageActive() {
-		return sysexMessageActive;
-	}
-
-	/**
-	 *
-	 * @param inSysexMessageActive
-	 */
-	public void setSysexMessageActive(boolean inSysexMessageActive) {
-		sysexMessageActive = inSysexMessageActive;
-	}
-
-	/**
-	 *
+	 * システム・リアルタイムメッセージの有効／無効を取得します。
 	 * @return
 	 */
 	public boolean isSystemRealtimeMessageActive() {
@@ -175,19 +159,43 @@ public class MidiInputQueue implements Receiver {
 	}
 
 	/**
-	 *
-	 * @param inSystemMessageActive
+	 * システム・リアルタイムメッセージの有効／無効を設定します。
+	 * @param systemRealtimeMessageActive
 	 */
-	public void setSystemRealtimeMessageActive(boolean inSystemMessageActive) {
-		systemRealtimeMessageActive = inSystemMessageActive;
+	public void setSystemRealtimeMessageActive(boolean systemRealtimeMessageActive) {
+		this.systemRealtimeMessageActive = systemRealtimeMessageActive;
 	}
 
+	/**
+	 * システム・コモン・メッセージの有効／無効を取得します。
+	 * @return
+	 */
 	public boolean isSystemCommonMessageActive() {
 		return systemCommonMessageActive;
 	}
 
+	/**
+	 * システム・コモン・メッセージの有効／無効を設定します。
+	 * @param systemCommonMessageActive
+	 */
 	public void setSystemCommonMessageActive(boolean systemCommonMessageActive) {
 		this.systemCommonMessageActive = systemCommonMessageActive;
+	}
+
+	/**
+	 * SysexMessageの有効／無効を取得します。
+	 * @return
+	 */
+	public boolean isSysexMessageActive() {
+		return sysexMessageActive;
+	}
+
+	/**
+	 * SysexMessageの有効／無効を設定します。
+	 * @param sysexMessageActive
+	 */
+	public void setSysexMessageActive(boolean sysexMessageActive) {
+		this.sysexMessageActive = sysexMessageActive;
 	}
 
 }
