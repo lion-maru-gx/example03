@@ -8,7 +8,11 @@ import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.SysexMessage;
 import javax.xml.bind.DatatypeConverter;
-
+/**
+ *
+ * @author lion-maru-gx
+ *
+ */
 public class MidiInputQueue implements Receiver {
 	/**
 	 * 入力メッセージキュー
@@ -98,6 +102,7 @@ public class MidiInputQueue implements Receiver {
 
 	/**
 	 * 入力MIDIイベントの取得します。
+	 * @return
 	 */
 	public MidiEvent getInputMidiEvent() {
 		if (inputMidiEventQueue.isEmpty()) {

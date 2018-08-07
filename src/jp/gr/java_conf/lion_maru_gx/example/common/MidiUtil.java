@@ -35,10 +35,13 @@ public class MidiUtil {
 	 * staticの初期化
 	 */
 	static {
-
 		// MIDI入力用レシーバの定義
 		receiver = new MidiInputQueue();
-
+		// メッセージの有効無効を設定する。
+		receiver.setChanelVoiceMessageActive(true);
+		receiver.setSystemCommonMessageActive(true);
+		receiver.setSystemRealtimeMessageActive(false);
+		receiver.setSysexMessageActive(true);
 	}
 
 	/**
