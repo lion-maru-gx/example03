@@ -1,9 +1,11 @@
 package jp.gr.java_conf.lion_maru_gx.example.common;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiDevice;
+import javax.sound.midi.MidiMessage;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Sequencer;
@@ -31,6 +33,8 @@ public class MidiUtil {
 	 */
 	private static MidiInputQueue receiver;
 
+	private List<MidiMessage> midiMessageList = new ArrayList<>();
+
 	/**
 	 * staticの初期化
 	 */
@@ -38,8 +42,8 @@ public class MidiUtil {
 		// MIDI入力用レシーバの定義
 		receiver = new MidiInputQueue();
 		// メッセージの有効無効を設定する。
-		receiver.setChanelVoiceMessageActive(true);
-		receiver.setSystemCommonMessageActive(true);
+		receiver.setChanelVoiceMessageActive(false);
+		receiver.setSystemCommonMessageActive(false);
 		receiver.setSystemRealtimeMessageActive(false);
 		receiver.setSysexMessageActive(true);
 	}
@@ -270,6 +274,25 @@ public class MidiUtil {
 				inputDevice.close();
 			}
 		}
+	}
+
+	/**
+	 * 入力メッセージを取得します。
+	 *
+	 * @return
+	 */
+	public String getInputMessages() {
+		String msg = "";
+		MidiMessage midiMsg;
+		while ((midiMsg = receiver.getInputMessage()) != null) {
+			midiMessageList.add(midiMsg);
+			msg = msg + DatatypeConverter.printHexBinary(midiMsg.getMessage()) + "\n";
+		}
+		return msg;
+	}
+
+	public void clearInputMessage() {
+		midiMessageList.clear();
 	}
 
 	/**

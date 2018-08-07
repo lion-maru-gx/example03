@@ -3,8 +3,8 @@
 本プログラムはJavaFXとMIDIの練習のために作成しました。
 example01をもとに作成されています。
 以下の機能を実現しています。
-・MIDIデータの録音しSMF形式でファイルに書き出す。
-・SMF形式のファイルを読込み再生する。
+・SysexMessageを受信しSMF形式でファイルに書き出す。
+・SMF形式のファイルを読込みSysexMessageを送信する。
 
 ##MIDIデバイス
 MIDIデバイスはMidiSystem.getMidiDeviceInfo()でデバイス情報を取得することができる。

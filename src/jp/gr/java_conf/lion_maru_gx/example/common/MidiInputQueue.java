@@ -2,12 +2,10 @@ package jp.gr.java_conf.lion_maru_gx.example.common;
 
 import java.util.LinkedList;
 
-import javax.sound.midi.MidiEvent;
 import javax.sound.midi.MidiMessage;
 import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.SysexMessage;
-import javax.xml.bind.DatatypeConverter;
 /**
  *
  * @author lion-maru-gx
@@ -17,11 +15,7 @@ public class MidiInputQueue implements Receiver {
 	/**
 	 * 入力メッセージキュー
 	 */
-	private LinkedList<MidiEvent> inputMidiEventQueue = new LinkedList<>();
-	/**
-	 * 事前のtimeStamp
-	 */
-	private long baseTime = 0;
+	private LinkedList<MidiMessage> inputMidiEventQueue = new LinkedList<>();
 
 	/**
 	 * チャンネル・ボイス・メッセージの有効／無効
@@ -82,33 +76,13 @@ public class MidiInputQueue implements Receiver {
 					return;
 				}
 			}
-			// レシーバがタイムスタンプをサポートしていない場合は、
-			// タイムスタンプ値は -1になるためシステム時間を使用します。
-			if (timeStamp == -1) {
-				timeStamp = System.currentTimeMillis();
-			}
-			if (baseTime == 0) {
-				baseTime = timeStamp;
-			}
-			inputMidiEventQueue.offer(new MidiEvent(message, timeStamp - baseTime));
-			baseTime = timeStamp;
+			inputMidiEventQueue.offer(message);
 		}
 	}
 
 	@Override
 	public void close() {
 		inputMidiEventQueue.clear();
-	}
-
-	/**
-	 * 入力MIDIイベントの取得します。
-	 * @return
-	 */
-	public MidiEvent getInputMidiEvent() {
-		if (inputMidiEventQueue.isEmpty()) {
-			return null;
-		}
-		return inputMidiEventQueue.poll();
 	}
 
 	/**
@@ -120,23 +94,7 @@ public class MidiInputQueue implements Receiver {
 		if (inputMidiEventQueue.isEmpty()) {
 			return null;
 		}
-		return getInputMidiEvent().getMessage();
-	}
-
-	/**
-	 * 入力メッセージを取得します。
-	 *
-	 * @return
-	 */
-	public String getInputMessages() {
-		String msg = "";
-		while (!inputMidiEventQueue.isEmpty()) {
-			MidiMessage midiMsg = getInputMessage();
-			if (midiMsg != null) {
-				msg = msg + DatatypeConverter.printHexBinary(midiMsg.getMessage()) + "\n";
-			}
-		}
-		return msg;
+		return inputMidiEventQueue.poll();
 	}
 
 	/**
