@@ -30,7 +30,7 @@ public class MidiInputQueue implements Receiver {
 	 */
 	private boolean systemCommonMessageActive = false;
 	/**
-	 * SysexMessageの有効／無効
+	 * システム・エクスクルーシブ・メッセージの有効／無効
 	 */
 
 	private boolean sysexMessageActive = true;
