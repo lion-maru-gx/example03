@@ -14,6 +14,7 @@ public class MainController {
 	 */
 	@FXML
 	public void handleExit() {
+		logger.debug("MainController.handleExit()");
 		MidiUtil.close();
 		Platform.exit();
 	}
